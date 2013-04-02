@@ -1,0 +1,161 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+    <title>loglevel by pimterry</title>
+
+    <link rel="stylesheet" href="stylesheets/styles.css">
+    <link rel="stylesheet" href="stylesheets/pygment_trac.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <!--[if lt IE 9]>
+    <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+  </head>
+  <body>
+    <div class="wrapper">
+      <header>
+        <h1>loglevel</h1>
+        <p>Minimal lightweight logging for JavaScript, adding a reliable log level methods to any available console.log methods</p>
+
+        <p class="view"><a href="https://github.com/pimterry/loglevel">View the Project on GitHub <small>pimterry/loglevel</small></a></p>
+
+
+        <ul>
+          <li><a href="https://github.com/pimterry/loglevel/zipball/master">Download <strong>ZIP File</strong></a></li>
+          <li><a href="https://github.com/pimterry/loglevel/tarball/master">Download <strong>TAR Ball</strong></a></li>
+          <li><a href="https://github.com/pimterry/loglevel">View On <strong>GitHub</strong></a></li>
+        </ul>
+      </header>
+      <section>
+        <h1>loglevel <a href="https://travis-ci.org/pimterry/loglevel"><img src="https://travis-ci.org/pimterry/loglevel.png" alt="Build Status"></a>
+</h1>
+
+<p>Minimal lightweight simple logging for JavaScript. loglevel replaces console.log() and friends with level-based logging and filtering, with none of console's downsides.</p>
+
+<p>This is a barebones reliable everyday logging library. It does not do fancy things, it does not let you reconfigure appenders or add complex log filtering rules or boil tea (more's the pity), but it does have the all core functionality that you actually use:</p>
+
+<h2>Features</h2>
+
+<h3>Simple</h3>
+
+<ul>
+<li>Log things at a given level (trace/debug/info/warn/error) to the console object (as seen in all modern browsers &amp; node.js)</li>
+<li>Filter logging by level (all the above or 'silent'), so you can disable all but error logging in production, and then run log.setLevel("trace") in your console to turn it all back on for a furious debugging session</li>
+</ul><h3>Effective</h3>
+
+<ul>
+<li>Log methods gracefully fall back to simpler console logging methods if more specific ones aren't available: so calls to log.debug() go to console.debug() if possible, or console.log() if not</li>
+<li>Logging calls still succeed even if there's no console object at all, so your site doesn't break when people visit with old browsers that don't support the console object (here's looking at you IE) and similar</li>
+<li>This then comes together giving a consistent reliable API that works in every JavaScript environment with a console available, and doesn't break anything anywhere else</li>
+</ul><h3>Convenient</h3>
+
+<ul>
+<li>Log output keeps line numbers: most JS logging frameworks call console.log methods through wrapper functions, clobbering your stacktrace and making the extra info many browsers provide useless. We'll have none of that thanks.</li>
+<li>It works with all the standard JavaScript loading systems out of the box (CommonJS, AMD, or just as a global)</li>
+<li>Logging is filtered to "warn" level by default, to keep your live site clean in normal usage (or you can trivially re-enable everything with an initial log.enableAll() call)</li>
+</ul><h2>Downloading loglevel</h2>
+
+<p>If you're using node, you can run <code>npm install loglevel</code>.</p>
+
+<p>Alternatively if you want to grab the file directly, you can download either the <a href="https://raw.github.com/pimterry/loglevel/master/dist/loglevel.min.js">production version</a> or the <a href="https://raw.github.com/pimterry/loglevel/master/dist/loglevel.js">development version</a> directly.</p>
+
+<h2>Setting it up</h2>
+
+<p>loglevel supports AMD (e.g. RequireJS), CommonJS (e.g. Node.js) and direct usage (e.g. loading globally with a &lt;script&gt; tag) loading methods. You should be able to do nearly anything, and then skip to the next section anyway and have it work. Just in case though, here's some specific examples that definitely do the right thing:</p>
+
+<h3>CommonsJS (e.g. Node)</h3>
+
+<div class="highlight"><pre><span class="kd">var</span> <span class="nx">log</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">'loglevel'</span><span class="p">);</span>
+<span class="nx">log</span><span class="p">.</span><span class="nx">info</span><span class="p">(</span><span class="s2">"unreasonably simple"</span><span class="p">);</span>
+</pre></div>
+
+<h3>AMD (e.g. RequireJS)</h3>
+
+<div class="highlight"><pre><span class="nx">define</span><span class="p">([</span><span class="s1">'loglevel'</span><span class="p">],</span> <span class="kd">function</span><span class="p">(</span><span class="nx">log</span><span class="p">)</span> <span class="p">{</span>
+   <span class="nx">log</span><span class="p">.</span><span class="nx">warn</span><span class="p">(</span><span class="s2">"dangerously convenient"</span><span class="p">);</span>
+<span class="p">});</span>
+</pre></div>
+
+<h3>Directly in your web page:</h3>
+
+<div class="highlight"><pre><span class="nt">&lt;script </span><span class="na">src=</span><span class="s">"loglevel.min.js"</span><span class="nt">&gt;&lt;/script&gt;</span>
+<span class="nt">&lt;script&gt;</span>
+<span class="nx">log</span><span class="p">.</span><span class="nx">error</span><span class="p">(</span><span class="s2">"too easy"</span><span class="p">);</span>
+<span class="nt">&lt;/script&gt;</span>
+</pre></div>
+
+<h2>Documentation</h2>
+
+<p>The loglevel API is extremely minimal. All methods are available on the root loglevel object, which it's suggested you name 'log' (this is the default if you import it in globally, and is what's set up in the above examples). The API consists of:</p>
+
+<ul>
+<li>
+<p>5 actual logging methods, ordered and available as:</p>
+
+<ul>
+<li><code>log.trace(msg)</code></li>
+<li><code>log.debug(msg)</code></li>
+<li><code>log.info(msg)</code></li>
+<li><code>log.warn(msg)</code></li>
+<li><code>log.error(msg)</code></li>
+</ul>
+<p>Exact output formatting of these will depend on the console available in the current context of your application. Notably, many environments will include a full stack trace with all trace() calls, and icons or similar to highlight other calls.</p>
+
+<p>These methods should never fail in any environment, even if no console object is currently available, and should always fall back to an available log method even if the specific method called (e.g. warn) isn't available.</p>
+</li>
+<li>
+<p>A <code>log.setLevel(level)</code> method.</p>
+
+<p>This disables all logging below the given level, so that after a log.setLevel("warn) call log.warn("something") or log.error("something") will output messages, but log.info("something") will not.</p>
+
+<p>This can take either a log level name or 'silent' (which disables everything) in one of a few forms:</p>
+
+<ul>
+<li>As a string, like 'error' (case-insensitive)</li>
+<li>As a log level from the internal levels list, e.g. log.levels.SILENT</li>
+<li>As a numeric index from 0 (trace) to 5 (silent).</li>
+</ul>
+<p><strong>log.setLevel() will throw an error if you attempt to set the level to a non-silent level and there is no console available.</strong> If you do want to explicitly change the default log level from warn in your codebase you should do so in a try/catch. Failing setLevel calls due to a missing console are equivalent to log.setLevel("silent"), which never fails.</p>
+</li>
+<li>
+<p><code>log.enableAll()</code> and <code>log.disableAll()</code> methods.</p>
+
+<p>These enable or disable all log messages, and are equivalent to log.setLevel("trace") and log.setLevel("silent") respectively.</p>
+</li>
+</ul><h2>Contributing</h2>
+
+<p>In lieu of a formal styleguide, take care to maintain the existing coding style. Add unit tests for any new or changed functionality. Builds can be run with grunt, just run 'grunt' in the root directory of the project. </p>
+
+<p><em>Also, please don't edit files in the "dist" subdirectory as they are generated via Grunt. You'll find source code in the "lib" subdirectory!</em></p>
+
+<h2>Release History</h2>
+
+<p>v0.1.0 - First working release with apparent compatibility with everything tested</p>
+
+<p>v0.2.0 - Updated release with various tweaks and polish and real proper documentation attached</p>
+
+<h2>License</h2>
+
+<p>Copyright (c) 2013 Tim Perry<br>
+Licensed under the MIT license.</p>
+      </section>
+      <footer>
+        <p>This project is maintained by <a href="https://github.com/pimterry">pimterry</a></p>
+        <p><small>Hosted on GitHub Pages &mdash; Theme by <a href="https://github.com/orderedlist">orderedlist</a></small></p>
+      </footer>
+    </div>
+    <script src="javascripts/scale.fix.js"></script>
+              <script type="text/javascript">
+            var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+            document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+          </script>
+          <script type="text/javascript">
+            try {
+              var pageTracker = _gat._getTracker("UA-39782351-1");
+            pageTracker._trackPageview();
+            } catch(err) {}
+          </script>
+
+  </body>
+</html>
