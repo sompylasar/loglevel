@@ -16,7 +16,7 @@
     <div class="wrapper">
       <header>
         <h1>loglevel</h1>
-        <p>Minimal lightweight logging for JavaScript, adding a reliable log level methods to any available console.log methods</p>
+        <p>Minimal lightweight logging for JavaScript, adding reliable log level methods to wrap any available console.log methods</p>
 
         <p class="view"><a href="https://github.com/pimterry/loglevel">View the Project on GitHub <small>pimterry/loglevel</small></a></p>
 
@@ -28,56 +28,66 @@
         </ul>
       </header>
       <section>
-        <h1>loglevel <a href="https://travis-ci.org/pimterry/loglevel"><img src="https://travis-ci.org/pimterry/loglevel.png" alt="Build Status"></a>
+        <h1>
+<a name="loglevel-" class="anchor" href="#loglevel-"><span class="octicon octicon-link"></span></a>loglevel <a href="https://travis-ci.org/pimterry/loglevel"><img src="https://travis-ci.org/pimterry/loglevel.png" alt="Build Status"></a>
 </h1>
 
 <p>Minimal lightweight simple logging for JavaScript. loglevel replaces console.log() and friends with level-based logging and filtering, with none of console's downsides.</p>
 
 <p>This is a barebones reliable everyday logging library. It does not do fancy things, it does not let you reconfigure appenders or add complex log filtering rules or boil tea (more's the pity), but it does have the all core functionality that you actually use:</p>
 
-<h2>Features</h2>
+<h2>
+<a name="features" class="anchor" href="#features"><span class="octicon octicon-link"></span></a>Features</h2>
 
-<h3>Simple</h3>
+<h3>
+<a name="simple" class="anchor" href="#simple"><span class="octicon octicon-link"></span></a>Simple</h3>
 
 <ul>
 <li>Log things at a given level (trace/debug/info/warn/error) to the console object (as seen in all modern browsers &amp; node.js)</li>
 <li>Filter logging by level (all the above or 'silent'), so you can disable all but error logging in production, and then run log.setLevel("trace") in your console to turn it all back on for a furious debugging session</li>
-</ul><h3>Effective</h3>
+</ul><h3>
+<a name="effective" class="anchor" href="#effective"><span class="octicon octicon-link"></span></a>Effective</h3>
 
 <ul>
 <li>Log methods gracefully fall back to simpler console logging methods if more specific ones aren't available: so calls to log.debug() go to console.debug() if possible, or console.log() if not</li>
 <li>Logging calls still succeed even if there's no console object at all, so your site doesn't break when people visit with old browsers that don't support the console object (here's looking at you IE) and similar</li>
 <li>This then comes together giving a consistent reliable API that works in every JavaScript environment with a console available, and doesn't break anything anywhere else</li>
-</ul><h3>Convenient</h3>
+</ul><h3>
+<a name="convenient" class="anchor" href="#convenient"><span class="octicon octicon-link"></span></a>Convenient</h3>
 
 <ul>
 <li>Log output keeps line numbers: most JS logging frameworks call console.log methods through wrapper functions, clobbering your stacktrace and making the extra info many browsers provide useless. We'll have none of that thanks.</li>
 <li>It works with all the standard JavaScript loading systems out of the box (CommonJS, AMD, or just as a global)</li>
 <li>Logging is filtered to "warn" level by default, to keep your live site clean in normal usage (or you can trivially re-enable everything with an initial log.enableAll() call)</li>
-</ul><h2>Downloading loglevel</h2>
+</ul><h2>
+<a name="downloading-loglevel" class="anchor" href="#downloading-loglevel"><span class="octicon octicon-link"></span></a>Downloading loglevel</h2>
 
-<p>If you're using node, you can run <code>npm install loglevel</code>.</p>
+<p>If you're using node, you can run <code>npm install loglevel</code>. loglevel is also available via <a href="https://github.com/bower/bower">Bower</a> (run <code>bower install loglevel</code>) or <a href="http://jamjs.org/packages/#/details/loglevel">JamJS</a> (run <code>jam install loglevel</code>)</p>
 
 <p>Alternatively if you want to grab the file directly, you can download either the <a href="https://raw.github.com/pimterry/loglevel/master/dist/loglevel.min.js">production version</a> or the <a href="https://raw.github.com/pimterry/loglevel/master/dist/loglevel.js">development version</a> directly.</p>
 
-<h2>Setting it up</h2>
+<h2>
+<a name="setting-it-up" class="anchor" href="#setting-it-up"><span class="octicon octicon-link"></span></a>Setting it up</h2>
 
 <p>loglevel supports AMD (e.g. RequireJS), CommonJS (e.g. Node.js) and direct usage (e.g. loading globally with a &lt;script&gt; tag) loading methods. You should be able to do nearly anything, and then skip to the next section anyway and have it work. Just in case though, here's some specific examples that definitely do the right thing:</p>
 
-<h3>CommonsJS (e.g. Node)</h3>
+<h3>
+<a name="commonsjs-eg-node" class="anchor" href="#commonsjs-eg-node"><span class="octicon octicon-link"></span></a>CommonsJS (e.g. Node)</h3>
 
 <div class="highlight"><pre><span class="kd">var</span> <span class="nx">log</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">'loglevel'</span><span class="p">);</span>
 <span class="nx">log</span><span class="p">.</span><span class="nx">info</span><span class="p">(</span><span class="s2">"unreasonably simple"</span><span class="p">);</span>
 </pre></div>
 
-<h3>AMD (e.g. RequireJS)</h3>
+<h3>
+<a name="amd-eg-requirejs" class="anchor" href="#amd-eg-requirejs"><span class="octicon octicon-link"></span></a>AMD (e.g. RequireJS)</h3>
 
 <div class="highlight"><pre><span class="nx">define</span><span class="p">([</span><span class="s1">'loglevel'</span><span class="p">],</span> <span class="kd">function</span><span class="p">(</span><span class="nx">log</span><span class="p">)</span> <span class="p">{</span>
    <span class="nx">log</span><span class="p">.</span><span class="nx">warn</span><span class="p">(</span><span class="s2">"dangerously convenient"</span><span class="p">);</span>
 <span class="p">});</span>
 </pre></div>
 
-<h3>Directly in your web page:</h3>
+<h3>
+<a name="directly-in-your-web-page" class="anchor" href="#directly-in-your-web-page"><span class="octicon octicon-link"></span></a>Directly in your web page:</h3>
 
 <div class="highlight"><pre><span class="nt">&lt;script </span><span class="na">src=</span><span class="s">"loglevel.min.js"</span><span class="nt">&gt;&lt;/script&gt;</span>
 <span class="nt">&lt;script&gt;</span>
@@ -85,7 +95,8 @@
 <span class="nt">&lt;/script&gt;</span>
 </pre></div>
 
-<h2>Documentation</h2>
+<h2>
+<a name="documentation" class="anchor" href="#documentation"><span class="octicon octicon-link"></span></a>Documentation</h2>
 
 <p>The loglevel API is extremely minimal. All methods are available on the root loglevel object, which it's suggested you name 'log' (this is the default if you import it in globally, and is what's set up in the above examples). The API consists of:</p>
 
@@ -112,33 +123,42 @@
 <p>This can take either a log level name or 'silent' (which disables everything) in one of a few forms:</p>
 
 <ul>
-<li>As a string, like 'error' (case-insensitive)</li>
-<li>As a log level from the internal levels list, e.g. log.levels.SILENT</li>
-<li>As a numeric index from 0 (trace) to 5 (silent).</li>
+<li>As a log level from the internal levels list, e.g. log.levels.SILENT &lt;- for type safety</li>
+<li>As a string, like 'error' (case-insensitive) &lt;- for a reasonable practical balance</li>
+<li>As a numeric index from 0 (trace) to 5 (silent) &lt;- deliciously terse, and more easily programmable (...although, why?)</li>
 </ul>
-<p><strong>log.setLevel() will throw an error if you attempt to set the level to a non-silent level and there is no console available.</strong> If you do want to explicitly change the default log level from warn in your codebase you should do so in a try/catch. Failing setLevel calls due to a missing console are equivalent to log.setLevel("silent"), which never fails.</p>
+<p>Where possible the loglevel will be persisted as a session cookie on the current domain. If cookies are not available in the current environment (i.e. in Node) this step will be skipped.</p>
+
+<p>It is expected that log.setLevel() will be manually called during debugging and similar, and as such you should note that <strong>log.setLevel() will throw an error if you attempt to set the level to a non-silent level and there is no console available.</strong> If you do want to explicitly change the default log level from warn in your codebase you should do so in a try/catch. Failing setLevel calls due to a missing console are equivalent to log.setLevel("silent"), which never fails.</p>
 </li>
 <li>
 <p><code>log.enableAll()</code> and <code>log.disableAll()</code> methods.</p>
 
 <p>These enable or disable all log messages, and are equivalent to log.setLevel("trace") and log.setLevel("silent") respectively.</p>
 </li>
-</ul><h2>Contributing</h2>
+</ul><h2>
+<a name="contributing" class="anchor" href="#contributing"><span class="octicon octicon-link"></span></a>Contributing</h2>
 
 <p>In lieu of a formal styleguide, take care to maintain the existing coding style. Add unit tests for any new or changed functionality. Builds can be run with grunt, just run 'grunt' in the root directory of the project. </p>
 
 <p><em>Also, please don't edit files in the "dist" subdirectory as they are generated via Grunt. You'll find source code in the "lib" subdirectory!</em></p>
 
-<h2>Release History</h2>
+<h2>
+<a name="release-history" class="anchor" href="#release-history"><span class="octicon octicon-link"></span></a>Release History</h2>
 
 <p>v0.1.0 - First working release with apparent compatibility with everything tested</p>
 
 <p>v0.2.0 - Updated release with various tweaks and polish and real proper documentation attached</p>
 
-<h2>License</h2>
+<p>v0.3.0 - Some bugfixes (#12, #14), cookie-based log level persistence, doc tweaks, support for Bower and JamJS</p>
+
+<h2>
+<a name="license" class="anchor" href="#license"><span class="octicon octicon-link"></span></a>License</h2>
 
 <p>Copyright (c) 2013 Tim Perry<br>
 Licensed under the MIT license.</p>
+
+<p><a href="http://githalytics.com/pimterry/loglevel"><img src="https://cruel-carlota.pagodabox.com/3393271900ddc6808ae1901f3760a59e" alt="githalytics.com alpha" title="githalytics.com"></a></p>
       </section>
       <footer>
         <p>This project is maintained by <a href="https://github.com/pimterry">pimterry</a></p>
