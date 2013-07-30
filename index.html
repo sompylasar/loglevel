@@ -29,7 +29,7 @@
       </header>
       <section>
         <h1>
-<a name="loglevel-" class="anchor" href="#loglevel-"><span class="octicon octicon-link"></span></a>loglevel <a href="https://travis-ci.org/pimterry/loglevel"><img src="https://travis-ci.org/pimterry/loglevel.png" alt="Build Status"></a>
+<a name="loglevel--" class="anchor" href="#loglevel--"><span class="octicon octicon-link"></span></a>loglevel <a href="https://travis-ci.org/pimterry/loglevel"><img src="https://travis-ci.org/pimterry/loglevel.png" alt="Build Status"></a> <a href="https://david-dm.org/pimterry/loglevel#info=devDependencies&amp;view=table"><img src="https://david-dm.org/pimterry/loglevel/dev-status.png" alt="Dependency status"></a>
 </h1>
 
 <p>Minimal lightweight simple logging for JavaScript. loglevel replaces console.log() and friends with level-based logging and filtering, with none of console's downsides.</p>
@@ -139,13 +139,28 @@
 <p>These enable or disable all log messages, and are equivalent to log.setLevel("trace") and log.setLevel("silent") respectively.</p>
 </li>
 </ul><h2>
-<a name="contributing" class="anchor" href="#contributing"><span class="octicon octicon-link"></span></a>Contributing</h2>
+<a name="contributing--developing" class="anchor" href="#contributing--developing"><span class="octicon octicon-link"></span></a>Contributing &amp; Developing</h2>
 
-<p>In lieu of a formal styleguide, take care to maintain the existing coding style. Add unit tests for any new or changed functionality. Builds can be run with grunt, just run 'grunt' in the root directory of the project. </p>
+<p>In lieu of a formal styleguide, take care to maintain the existing coding style. Add unit tests for any new or changed functionality.</p>
 
-<p><em>Also, please don't edit files in the "dist" subdirectory as they are generated via Grunt. You'll find source code in the "lib" subdirectory!</em></p>
+<p>Builds can be run with grunt, run <code>grunt</code> to build a distributable version of the project (in /dist), or <code>grunt test</code> to just run the tests and linting. During development you can run <code>grunt watch</code> and it will monitor source files, and rerun the tests and linting as appropriate when they're changed.</p>
 
-<h2>
+<p><em>Also, please don't manually edit files in the "dist" subdirectory as they are generated via Grunt. You'll find source code in the "lib" subdirectory!</em></p>
+
+<h4>
+<a name="release-process" class="anchor" href="#release-process"><span class="octicon octicon-link"></span></a>Release process</h4>
+
+<p>To do a release of loglevel:</p>
+
+<ul>
+<li>Update the version number in package.json and bower.json</li>
+<li>Run <code>grunt</code> to build a distributable version in dist/</li>
+<li>Update the release history in this file (below)</li>
+<li>Commit the built code, tagging it with the version number and a brief message about the release</li>
+<li>Push to Github</li>
+<li>Run <code>npm publish .</code> to publish to NPM</li>
+<li>Run <code>jam publish</code> to publish to JamJS</li>
+</ul><h2>
 <a name="release-history" class="anchor" href="#release-history"><span class="octicon octicon-link"></span></a>Release History</h2>
 
 <p>v0.1.0 - First working release with apparent compatibility with everything tested</p>
@@ -154,13 +169,13 @@
 
 <p>v0.3.0 - Some bugfixes (#12, #14), cookie-based log level persistence, doc tweaks, support for Bower and JamJS</p>
 
+<p>v0.3.1 - Fixed incorrect text in release build banner, various other minor tweaks</p>
+
 <h2>
 <a name="license" class="anchor" href="#license"><span class="octicon octicon-link"></span></a>License</h2>
 
 <p>Copyright (c) 2013 Tim Perry<br>
 Licensed under the MIT license.</p>
-
-<p><a href="http://githalytics.com/pimterry/loglevel"><img src="https://cruel-carlota.pagodabox.com/3393271900ddc6808ae1901f3760a59e" alt="githalytics.com alpha" title="githalytics.com"></a></p>
       </section>
       <footer>
         <p>This project is maintained by <a href="https://github.com/pimterry">pimterry</a></p>
