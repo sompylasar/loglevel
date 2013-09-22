@@ -68,6 +68,8 @@
 
 <p>Alternatively if you just want to grab the file yourself, you can download either the current stable <a href="https://raw.github.com/pimterry/loglevel/master/dist/loglevel.min.js">production version</a> or the <a href="https://raw.github.com/pimterry/loglevel/master/dist/loglevel.js">development version</a> directly.</p>
 
+<p>Finally, if you want to tweak loglevel to your own needs or you immediately need the cutting-edge version, clone this repo and see <a href="#developing--contributing">Developing &amp; Contributing</a> below for build instructions.</p>
+
 <h2>
 <a name="setting-it-up" class="anchor" href="#setting-it-up"><span class="octicon octicon-link"></span></a>Setting it up</h2>
 
@@ -76,14 +78,14 @@
 <h3>
 <a name="commonsjs-eg-node" class="anchor" href="#commonsjs-eg-node"><span class="octicon octicon-link"></span></a>CommonsJS (e.g. Node)</h3>
 
-<div class="highlight"><pre><span class="kd">var</span> <span class="nx">log</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">'loglevel'</span><span class="p">);</span>
+<div class="highlight highlight-javascript"><pre><span class="kd">var</span> <span class="nx">log</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">'loglevel'</span><span class="p">);</span>
 <span class="nx">log</span><span class="p">.</span><span class="nx">info</span><span class="p">(</span><span class="s2">"unreasonably simple"</span><span class="p">);</span>
 </pre></div>
 
 <h3>
 <a name="amd-eg-requirejs" class="anchor" href="#amd-eg-requirejs"><span class="octicon octicon-link"></span></a>AMD (e.g. RequireJS)</h3>
 
-<div class="highlight"><pre><span class="nx">define</span><span class="p">([</span><span class="s1">'loglevel'</span><span class="p">],</span> <span class="kd">function</span><span class="p">(</span><span class="nx">log</span><span class="p">)</span> <span class="p">{</span>
+<div class="highlight highlight-javascript"><pre><span class="nx">define</span><span class="p">([</span><span class="s1">'loglevel'</span><span class="p">],</span> <span class="kd">function</span><span class="p">(</span><span class="nx">log</span><span class="p">)</span> <span class="p">{</span>
    <span class="nx">log</span><span class="p">.</span><span class="nx">warn</span><span class="p">(</span><span class="s2">"dangerously convenient"</span><span class="p">);</span>
 <span class="p">});</span>
 </pre></div>
@@ -91,7 +93,7 @@
 <h3>
 <a name="directly-in-your-web-page" class="anchor" href="#directly-in-your-web-page"><span class="octicon octicon-link"></span></a>Directly in your web page:</h3>
 
-<div class="highlight"><pre><span class="nt">&lt;script </span><span class="na">src=</span><span class="s">"loglevel.min.js"</span><span class="nt">&gt;&lt;/script&gt;</span>
+<div class="highlight highlight-html"><pre><span class="nt">&lt;script </span><span class="na">src=</span><span class="s">"loglevel.min.js"</span><span class="nt">&gt;&lt;/script&gt;</span>
 <span class="nt">&lt;script&gt;</span>
 <span class="nx">log</span><span class="p">.</span><span class="nx">error</span><span class="p">(</span><span class="s2">"too easy"</span><span class="p">);</span>
 <span class="nt">&lt;/script&gt;</span>
@@ -129,7 +131,7 @@
 <li>As a string, like 'error' (case-insensitive) &lt;- for a reasonable practical balance</li>
 <li>As a numeric index from 0 (trace) to 5 (silent) &lt;- deliciously terse, and more easily programmable (...although, why?)</li>
 </ul>
-<p>Where possible the loglevel will be persisted as a session cookie on the current domain. If cookies are not available in the current environment (i.e. in Node) this step will be skipped.</p>
+<p>Where possible the log level will be persisted. LocalStorage will be used if available, falling back to cookies if not. If neither is available in the current environment (i.e. in Node) persistence will be skipped.</p>
 
 <p>It is expected that log.setLevel() will be manually called during debugging and similar, and as such you should note that <strong>log.setLevel() will throw an error if you attempt to set the level to a non-silent level and there is no console available.</strong> If you do want to explicitly change the default log level from warn in your codebase you should do so in a try/catch. Failing setLevel calls due to a missing console are equivalent to log.setLevel("silent"), which never fails.</p>
 </li>
@@ -139,11 +141,11 @@
 <p>These enable or disable all log messages, and are equivalent to log.setLevel("trace") and log.setLevel("silent") respectively.</p>
 </li>
 </ul><h2>
-<a name="contributing--developing" class="anchor" href="#contributing--developing"><span class="octicon octicon-link"></span></a>Contributing &amp; Developing</h2>
+<a name="developing--contributing" class="anchor" href="#developing--contributing"><span class="octicon octicon-link"></span></a>Developing &amp; Contributing</h2>
 
 <p>In lieu of a formal styleguide, take care to maintain the existing coding style. Add unit tests for any new or changed functionality.</p>
 
-<p>Builds can be run with grunt, run <code>grunt</code> to build a distributable version of the project (in /dist), or <code>grunt test</code> to just run the tests and linting. During development you can run <code>grunt watch</code> and it will monitor source files, and rerun the tests and linting as appropriate when they're changed.</p>
+<p>Builds can be run with grunt: run <code>grunt dist</code> to build a distributable version of the project (in /dist), or <code>grunt test</code> to just run the tests and linting. During development you can run <code>grunt watch</code> and it will monitor source files, and rerun the tests and linting as appropriate when they're changed.</p>
 
 <p><em>Also, please don't manually edit files in the "dist" subdirectory as they are generated via Grunt. You'll find source code in the "lib" subdirectory!</em></p>
 
@@ -154,7 +156,7 @@
 
 <ul>
 <li>Update the version number in package.json and bower.json</li>
-<li>Run <code>grunt</code> to build a distributable version in dist/</li>
+<li>Run <code>grunt dist</code> to build a distributable version in dist/</li>
 <li>Update the release history in this file (below)</li>
 <li>Commit the built code, tagging it with the version number and a brief message about the release</li>
 <li>Push to Github</li>
@@ -171,11 +173,15 @@
 
 <p>v0.3.1 - Fixed incorrect text in release build banner, various other minor tweaks</p>
 
+<p>v0.4.0 - Use LocalStorage for level persistence if available, compatibility improvements for IE, improved error messages, multi-environment tests</p>
+
 <h2>
 <a name="license" class="anchor" href="#license"><span class="octicon octicon-link"></span></a>License</h2>
 
 <p>Copyright (c) 2013 Tim Perry<br>
 Licensed under the MIT license.</p>
+
+<p><a href="http://githalytics.com/pimterry/loglevel"><img src="https://cruel-carlota.pagodabox.com/3393271900ddc6808ae1901f3760a59e" alt="githalytics.com alpha"></a></p>
       </section>
       <footer>
         <p>This project is maintained by <a href="https://github.com/pimterry">pimterry</a></p>
@@ -183,7 +189,6 @@ Licensed under the MIT license.</p>
       </footer>
     </div>
     <script src="javascripts/scale.fix.js"></script>
-    <script src="javascripts/loglevel.js"></script>
               <script type="text/javascript">
             var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
             document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
