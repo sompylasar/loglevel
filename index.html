@@ -29,7 +29,7 @@
       </header>
       <section>
         <h1>
-<a name="loglevel--" class="anchor" href="#loglevel--"><span class="octicon octicon-link"></span></a>loglevel <a href="https://travis-ci.org/pimterry/loglevel"><img src="https://travis-ci.org/pimterry/loglevel.png" alt="Build Status"></a> <a href="https://david-dm.org/pimterry/loglevel#info=devDependencies&amp;view=table"><img src="https://david-dm.org/pimterry/loglevel/dev-status.png" alt="Dependency status"></a>
+<a name="loglevel--" class="anchor" href="#loglevel--"><span class="octicon octicon-link"></span></a>loglevel <a href="https://travis-ci.org/pimterry/loglevel"><img src="https://travis-ci.org/pimterry/loglevel.png" alt="Build Status"></a> <a href="https://coveralls.io/r/pimterry/loglevel?branch=master"><img src="https://coveralls.io/repos/pimterry/loglevel/badge.png?branch=master" alt="Coverage Status"></a>
 </h1>
 
 <p>Minimal lightweight simple logging for JavaScript. loglevel replaces console.log() and friends with level-based logging and filtering, with none of console's downsides.</p>
@@ -124,7 +124,7 @@
 <li>
 <p>A <code>log.setLevel(level)</code> method.</p>
 
-<p>This disables all logging below the given level, so that after a log.setLevel("warn) call log.warn("something") or log.error("something") will output messages, but log.info("something") will not.</p>
+<p>This disables all logging below the given level, so that after a log.setLevel("warn") call log.warn("something") or log.error("something") will output messages, but log.info("something") will not.</p>
 
 <p>This can take either a log level name or 'silent' (which disables everything) in one of a few forms:</p>
 
@@ -183,6 +183,8 @@
 <p>v0.4.0 - Use LocalStorage for level persistence if available, compatibility improvements for IE, improved error messages, multi-environment tests</p>
 
 <p>v0.5.0 - Fix for Modernizr+IE8 issues, improved setLevel error handling, support for auto-activation of desired logging when console eventually turns up in IE8</p>
+
+<p>v0.6.0 - Handle logging in Safari private browsing mode (#33), fix TRACE level persistence bug (#35), plus various minor tweaks</p>
 
 <h2>
 <a name="license" class="anchor" href="#license"><span class="octicon octicon-link"></span></a>License</h2>
