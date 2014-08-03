@@ -29,7 +29,7 @@
       </header>
       <section>
         <h1>
-<a name="loglevel--" class="anchor" href="#loglevel--"><span class="octicon octicon-link"></span></a>loglevel <a href="https://travis-ci.org/pimterry/loglevel"><img src="https://travis-ci.org/pimterry/loglevel.png" alt="Build Status"></a> <a href="https://coveralls.io/r/pimterry/loglevel?branch=master"><img src="https://coveralls.io/repos/pimterry/loglevel/badge.png?branch=master" alt="Coverage Status"></a>
+<a name="loglevel---" class="anchor" href="#loglevel---"><span class="octicon octicon-link"></span></a>loglevel <a href="https://travis-ci.org/pimterry/loglevel"><img src="https://travis-ci.org/pimterry/loglevel.png" alt="Build Status"></a> <a href="https://coveralls.io/r/pimterry/loglevel?branch=master"><img src="https://coveralls.io/repos/pimterry/loglevel/badge.png?branch=master" alt="Coverage Status"></a> <a href="https://david-dm.org/pimterry/loglevel#info=devDependencies&amp;view=table"><img src="https://david-dm.org/pimterry/loglevel/dev-status.png" alt="Dependency status"></a>
 </h1>
 
 <p>Minimal lightweight simple logging for JavaScript. loglevel replaces console.log() and friends with level-based logging and filtering, with none of console's downsides.</p>
@@ -98,6 +98,21 @@
 <div class="highlight highlight-html"><pre><span class="nt">&lt;script </span><span class="na">src=</span><span class="s">"loglevel.min.js"</span><span class="nt">&gt;&lt;/script&gt;</span>
 <span class="nt">&lt;script&gt;</span>
 <span class="nx">log</span><span class="p">.</span><span class="nx">error</span><span class="p">(</span><span class="s2">"too easy"</span><span class="p">);</span>
+<span class="nt">&lt;/script&gt;</span>
+</pre></div>
+
+<h3>
+<a name="with-noconflict" class="anchor" href="#with-noconflict"><span class="octicon octicon-link"></span></a>With noConflict():</h3>
+
+<p>If you're using another JavaScript library that exposes a 'log' global, you can run into conflicts with loglevel.  Similarly to jQuery, you can solve this by putting loglevel into no-conflict mode immediately after it is loaded onto the page. This resets to 'log' global to its value before loglevel was loaded (typically <code>undefined</code>), and returns the loglevel object, which you can then bind to another name yourself.</p>
+
+<p>For example:</p>
+
+<div class="highlight highlight-html"><pre><span class="nt">&lt;script </span><span class="na">src=</span><span class="s">"loglevel.min.js"</span><span class="nt">&gt;&lt;/script&gt;</span>
+<span class="nt">&lt;script&gt;</span>
+<span class="kd">var</span> <span class="nx">logging</span> <span class="o">=</span> <span class="nx">log</span><span class="p">.</span><span class="nx">noConflict</span><span class="p">();</span>
+
+<span class="nx">logging</span><span class="p">.</span><span class="nx">error</span><span class="p">(</span><span class="s2">"still pretty easy"</span><span class="p">);</span>
 <span class="nt">&lt;/script&gt;</span>
 </pre></div>
 
@@ -186,6 +201,8 @@
 
 <p>v0.6.0 - Handle logging in Safari private browsing mode (#33), fix TRACE level persistence bug (#35), plus various minor tweaks</p>
 
+<p>v1.0.0 - Official stable release. Fixed a bug with localStorage in Android webviews, improved CommonJS detection, and added noConflict().</p>
+
 <h2>
 <a name="license" class="anchor" href="#license"><span class="octicon octicon-link"></span></a>License</h2>
 
@@ -193,8 +210,6 @@
 Licensed under the MIT license.</p>
 
 <p><a href="http://githalytics.com/pimterry/loglevel"><img src="https://cruel-carlota.pagodabox.com/3393271900ddc6808ae1901f3760a59e" alt="githalytics.com alpha"></a></p>
-
-<p><a href="https://bitdeli.com/free" title="Bitdeli Badge"><img src="https://d2weczhvl823v0.cloudfront.net/pimterry/loglevel/trend.png" alt="Bitdeli Badge"></a></p>
       </section>
       <footer>
         <p>This project is maintained by <a href="https://github.com/pimterry">pimterry</a></p>
