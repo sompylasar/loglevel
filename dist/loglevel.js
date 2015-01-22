@@ -1,5 +1,7 @@
-/*! loglevel - v1.2.0 - https://github.com/pimterry/loglevel - (c) 2014 Tim Perry - licensed MIT */
+/*! loglevel - v1.3.0 - https://github.com/pimterry/loglevel - (c) 2015 Tim Perry - licensed MIT */
 (function (root, definition) {
+    "use strict";
+
     if (typeof module === 'object' && module.exports && typeof require === 'function') {
         module.exports = definition();
     } else if (typeof define === 'function' && typeof define.amd === 'object') {
@@ -8,6 +10,9 @@
         root.log = definition();
     }
 }(this, function () {
+    /*global console, window*/
+    "use strict";
+
     var self = {};
     var noop = function() {};
     var undefinedType = "undefined";
@@ -58,45 +63,15 @@
     ];
 
     function replaceLoggingMethods(level) {
+        var methodName;
         for (var i = 0; i < logMethods.length; i++) {
-            var methodName = logMethods[i];
+            methodName = logMethods[i];
             self[methodName] = (i < level) ? noop : self.methodFactory(methodName, level);
         }
-    }
 
-    function persistLevelIfPossible(levelNum) {
-        var levelName = (logMethods[levelNum] || 'silent').toUpperCase();
-
-        // Use localStorage if available
-        try {
-            window.localStorage['loglevel'] = levelName;
-            return;
-        } catch (ignore) {}
-
-        // Use session cookie as fallback
-        try {
-            window.document.cookie = "loglevel=" + levelName + ";";
-        } catch (ignore) {}
-    }
-
-    function loadPersistedLevel() {
-        var storedLevel;
-
-        try {
-            storedLevel = window.localStorage['loglevel'];
-        } catch (ignore) {}
-
-        if (typeof storedLevel === undefinedType) {
-            try {
-                storedLevel = /loglevel=([^;]+)/.exec(window.document.cookie)[1];
-            } catch (ignore) {}
-        }
-        
-        if (self.levels[storedLevel] === undefined) {
-            storedLevel = "WARN";
-        }
-
-        self.setLevel(self.levels[storedLevel]);
+        // Additional `log` method to make a complete drop-in `console` replacement.
+        methodName = "log";
+        self[methodName] = (self.levels.INFO < level) ? noop : self.methodFactory(methodName, level);
     }
 
     /*
@@ -105,8 +80,14 @@
      *
      */
 
-    self.levels = { "TRACE": 0, "DEBUG": 1, "INFO": 2, "WARN": 3,
-        "ERROR": 4, "SILENT": 5};
+    self.levels = {
+        "TRACE": 0,
+        "DEBUG": 1,
+        "INFO": 2,
+        "WARN": 3,
+        "ERROR": 4,
+        "SILENT": 5
+    };
 
     self.methodFactory = function (methodName, level) {
         return realMethod(methodName) ||
@@ -118,13 +99,13 @@
             level = self.levels[level.toUpperCase()];
         }
         if (typeof level === "number" && level >= 0 && level <= self.levels.SILENT) {
-            persistLevelIfPossible(level);
             replaceLoggingMethods(level);
             if (typeof console === undefinedType && level < self.levels.SILENT) {
-                return "No console available for logging";
+                // No console available for logging. Do not throw, cannot fix it.
+                return false;
             }
         } else {
-            throw "log.setLevel() called with invalid level: " + level;
+            throw new Error("log.setLevel() called with invalid level: " + level);
         }
     };
 
@@ -147,6 +128,7 @@
         return self;
     };
 
-    loadPersistedLevel();
+    // Log level persistence has been removed, enable logging by default.
+    self.enableAll();
     return self;
 }));

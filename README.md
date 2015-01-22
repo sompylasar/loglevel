@@ -179,6 +179,8 @@ v1.1.0 - Added support for including loglevel with preprocessing and .apply() (#
 
 v1.2.0 - New plugin API! Plus various bits of refactoring and tidy up, nicely simplifying things and trimming the size down.
 
+v1.3.0 - (by @sompylasar) Added `log` method at `INFO` level to provide replacement for the standard `console.log`. Removed log level persistence for production use (do not modify the storage with hard-coded keys; do not create cookies with hard-coded names that are sent to the server with every request).
+
 ## License
 Copyright (c) 2013 Tim Perry  
 Licensed under the MIT license.
