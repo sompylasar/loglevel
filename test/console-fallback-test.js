@@ -32,9 +32,9 @@ define(['../lib/loglevel'], function(log) {
                 expect(result).toBeUndefined();
             });
 
-            it("setting an active level gently returns an error string", function() {
+            it("setting an active level gently returns false", function() {
                 var result = log.setLevel(log.levels.TRACE);
-                expect(result).toEqual("No console available for logging");
+                expect(result).toEqual(false);
             });
 
             it("active method calls are allowed, once the active setLevel fails", function() {
